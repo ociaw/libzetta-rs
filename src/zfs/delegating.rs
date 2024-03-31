@@ -63,6 +63,10 @@ impl ZfsEngine for DelegatingZfsEngine {
         self.open3.list_snapshots(pool)
     }
 
+    fn list_direct_snapshots<N: Into<PathBuf>>(&self, pool: N) -> Result<Vec<PathBuf>> {
+        self.open3.list_direct_snapshots(pool)
+    }
+
     fn list_bookmarks<N: Into<PathBuf>>(&self, pool: N) -> Result<Vec<PathBuf>> {
         self.open3.list_bookmarks(pool)
     }

@@ -128,6 +128,14 @@ impl ZfsEngine for ZfsOpen3 {
         ZfsOpen3::stdout_to_list_of_datasets(&mut z)
     }
 
+    fn list_direct_snapshots<N: Into<PathBuf>>(&self, dataset: N) -> Result<Vec<PathBuf>> {
+        let mut z = self.zfs();
+        z.args(&["list", "-t", "snapshot", "-o", "name", "-Hp"]);
+        z.arg(dataset.into().as_os_str());
+        debug!(self.logger, "executing"; "cmd" => format_args!("{:?}", z));
+        ZfsOpen3::stdout_to_list_of_datasets(&mut z)
+    }
+
     fn list_bookmarks<N: Into<PathBuf>>(&self, pool: N) -> Result<Vec<PathBuf>> {
         let mut z = self.zfs();
         z.args(&["list", "-t", "bookmark", "-o", "name", "-Hpr"]);

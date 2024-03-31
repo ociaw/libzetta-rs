@@ -131,8 +131,14 @@ pub trait ZfsEngine {
     fn list_filesystems<N: Into<PathBuf>>(&self, _pool: N) -> Result<Vec<PathBuf>> {
         Err(Error::Unimplemented)
     }
+    /// Recursively lists all snapshots of the specified dataset and all of its descendents.
     #[cfg_attr(tarpaulin, skip)]
     fn list_snapshots<N: Into<PathBuf>>(&self, _pool: N) -> Result<Vec<PathBuf>> {
+        Err(Error::Unimplemented)
+    }
+    /// Lists all snapshots of the specified dataset.
+    #[cfg_attr(tarpaulin, skip)]
+    fn list_direct_snapshots<N: Into<PathBuf>>(&self, _pool: N) -> Result<Vec<PathBuf>> {
         Err(Error::Unimplemented)
     }
     #[cfg_attr(tarpaulin, skip)]
